@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <Extern href="stdidcmd.h"/>
+  <Extern href="vsshlids.h"/>
+  <Include href="KnownImageIds.vsct" />
+
+  <Commands package="guidClearCachePackage">
+    <Groups>
+      <Group guid="guidClearCachePackageCmdSet" id="MyMenuGroup" priority="5800">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
+      </Group>
+    </Groups>
+
+    <Buttons>
+      <Button guid="guidClearCachePackageCmdSet" id="ClearCacheId" priority="0x0600" type="Button">
+        <Parent guid="guidClearCachePackageCmdSet" id="MyMenuGroup" />
+        <Icon guid="ImageCatalogGuid" id="CleanData" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>Clear MEF Component Cache...</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+
+  </Commands>
+
+  <Symbols>
+    <!-- This is the package guid. -->
+    <GuidSymbol name="guidClearCachePackage" value="{22470c17-41ed-45b7-ad6f-59c94e7b62a7}" />
+
+    <GuidSymbol name="guidClearCachePackageCmdSet" value="{a0c73f0b-ee00-4b48-be1d-99b6deb8652d}">
+      <IDSymbol name="MyMenuGroup" value="1" />
+      <IDSymbol name="ClearCacheId" value="100" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>

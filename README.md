@@ -10,7 +10,6 @@ or get the
 [nightly build](http://vsixgallery.com/extension/f5028141-9dd0-4ac4-ae6d-0481ae9a940d/)
 
 ### What does it do?
-
 This extension clears the MEF cache on disk and lets Visual Studio rebuild it. The
 reason for clearing the MEF cache is that it can become corrupted. This ususally
 happens when installing or updating extensions or other Visual Studio components.
@@ -21,7 +20,6 @@ makes it easy to delete that folder so you don't have to remember the location o
 the cache directory.
 
 ### Using the extension
-
 In Visual Studio's top menu under Tools, a new command is now visible:
 
 ![Menu Button](art/menu-button.png)
@@ -33,3 +31,14 @@ and then restart Visual Studio.
 
 Restarting Visual Studio will automatically trigger a reconstruction of the
 MEF cache. This is a safe operation that doesn't cause any unwanted side effects.
+
+### /RootSuffix support
+It is unlikely you use the `/rootSuffix` command line switch and can therefore
+just ignore this section.
+
+If you use any root suffix when you start Visual Studio, then those will
+be honored when deleting the cache. This extension will automatically delete the
+cache belonging to the current root suffix.
+
+Read more about the
+[/RootSuffix command line switch](http://blog.slaks.net/2014-01-27/creating-multiple-visual-studio-profiles-with-rootsuffix/).

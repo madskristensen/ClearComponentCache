@@ -15,12 +15,9 @@ namespace ClearComponentCache
             ServiceProvider = package;
 
             OleMenuCommandService commandService = ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
-            if (commandService != null)
-            {
-                var menuCommandID = new CommandID(PackageGuids.guidClearCachePackageCmdSet, PackageIds.ClearCacheId);
-                var menuItem = new MenuCommand(DeleteCacheFolder, menuCommandID);
-                commandService.AddCommand(menuItem);
-            }
+            var commandID = new CommandID(PackageGuids.guidClearCachePackageCmdSet, PackageIds.ClearCacheId);
+            var button = new MenuCommand(DeleteCacheFolder, commandID);
+            commandService.AddCommand(button);
         }
 
         public static ClearCache Instance { get; private set; }
@@ -34,10 +31,7 @@ namespace ClearComponentCache
 
         private void DeleteCacheFolder(object sender, EventArgs e)
         {
-            string prompt = "This will clear the MEF component cache and restart Visual Studio.\r\n\r\nDo you wish to continue?";
-            var result = MessageBox.Show(prompt, "Clear MEF Component Cache", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.No)
+            if (!UserWantsToProceed())
                 return;
 
             string folder = GetFolderPath();
@@ -49,6 +43,11 @@ namespace ClearComponentCache
 
                 Directory.Delete(folder, true);
             }
+        }
+
+        private bool UserWantsToProceed()
+        {
+            return MessageBox.Show(Text.promptText, ClearCachePackage.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
         }
 
         private string GetFolderPath()

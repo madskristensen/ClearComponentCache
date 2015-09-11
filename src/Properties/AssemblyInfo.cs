@@ -2,11 +2,11 @@
 using System.Runtime.InteropServices;
 using ClearComponentCache;
 
-[assembly: AssemblyTitle("Clear Component Cache")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle(ClearCachePackage.Name)]
+[assembly: AssemblyDescription("Clears the Visual Studio MEF component cache to fix issues with cache corruption.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Mads Kristensen")]
-[assembly: AssemblyProduct("Clear Component Cache")]
+[assembly: AssemblyProduct(ClearCachePackage.Name)]
 [assembly: AssemblyCopyright("Mads Kristensen")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("en-US")]

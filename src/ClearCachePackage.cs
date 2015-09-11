@@ -11,6 +11,7 @@ namespace ClearComponentCache
     public sealed class ClearCachePackage : Package
     {
         public const string Version = "1.0";
+        public const string Name = "Clear MEF Component Cache";
 
         protected override void Initialize()
         {

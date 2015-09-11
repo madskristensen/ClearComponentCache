@@ -32,4 +32,4 @@ and then restart Visual Studio.
 ![Popup dialog](art/prompt.png)
 
 Restarting Visual Studio will automatically trigger a reconstruction of the
-MEF cache. This is a safe operation that doesn't case any unwanted side effects.
+MEF cache. This is a safe operation that doesn't cause any unwanted side effects.

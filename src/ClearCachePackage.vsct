@@ -7,7 +7,7 @@
 
   <Commands package="guidClearCachePackage">
     <Groups>
-      <Group guid="guidClearCachePackageCmdSet" id="MyMenuGroup" priority="5800">
+      <Group guid="guidClearCachePackageCmdSet" id="MyMenuGroup" priority="0x5800">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
       </Group>
     </Groups>

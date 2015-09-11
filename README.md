@@ -14,6 +14,13 @@ This extension clears the MEF cache on disk and lets Visual Studio rebuild it. T
 reason for clearing the MEF cache is that it can become corrupted. This ususally
 happens when installing or updating extensions or other Visual Studio components.
 
+Typical errors that can be solved by clearing the component cache are:
+
+- Could not load package exception
+- Could not load assembly exception
+- Composition error when opening files
+- Missing syntax highlighting of some languages in VS
+
 The Visual Studio component cache is located at
 **%localappdata%\Microsoft\VisualStudio\14.0\ComponentModelCache**. This extension
 makes it easy to delete that folder so you don't have to remember the location of

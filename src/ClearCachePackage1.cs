@@ -17,7 +17,6 @@ namespace ClearComponentCache
     /// </summary>
     internal sealed partial class PackageIds
     {
-        public const int MyMenuGroup = 0x0001;
         public const int ClearCacheId = 0x0064;
     }
 }

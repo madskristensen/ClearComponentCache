@@ -49,7 +49,7 @@ namespace ClearComponentCache
         private void DeleteCacheFolder(object sender, EventArgs e)
         {
             string prompt = "This will clear the MEF component cache and restart Visual Studio.\r\n\r\nDo you wish to continue?";
-            var result = MessageBox.Show(prompt, "Clear Component Cache", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var result = MessageBox.Show(prompt, "Clear MEF Component Cache", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.No)
                 return;

@@ -6,15 +6,9 @@
   <Include href="KnownImageIds.vsct" />
 
   <Commands package="guidClearCachePackage">
-    <Groups>
-      <Group guid="guidClearCachePackageCmdSet" id="MyMenuGroup" priority="0x5800">
-        <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
-      </Group>
-    </Groups>
-
     <Buttons>
-      <Button guid="guidClearCachePackageCmdSet" id="ClearCacheId" priority="0x0600" type="Button">
-        <Parent guid="guidClearCachePackageCmdSet" id="MyMenuGroup" />
+      <Button guid="guidClearCachePackageCmdSet" id="ClearCacheId" priority="0x9500" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_TOOLS_EXT_TOOLS" />
         <Icon guid="ImageCatalogGuid" id="CleanData" />
         <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
@@ -30,7 +24,6 @@
     <GuidSymbol name="guidClearCachePackage" value="{22470c17-41ed-45b7-ad6f-59c94e7b62a7}" />
 
     <GuidSymbol name="guidClearCachePackageCmdSet" value="{a0c73f0b-ee00-4b48-be1d-99b6deb8652d}">
-      <IDSymbol name="MyMenuGroup" value="1" />
       <IDSymbol name="ClearCacheId" value="100" />
     </GuidSymbol>
   </Symbols>

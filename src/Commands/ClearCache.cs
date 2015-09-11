@@ -10,18 +10,11 @@ namespace ClearComponentCache
 {
     internal sealed class ClearCache
     {
-        private readonly Package package;
-
         private ClearCache(Package package)
         {
-            if (package == null)
-            {
-                throw new ArgumentNullException("package");
-            }
+            ServiceProvider = package;
 
-            this.package = package;
-
-            OleMenuCommandService commandService = this.ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            OleMenuCommandService commandService = ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if (commandService != null)
             {
                 var menuCommandID = new CommandID(PackageGuids.guidClearCachePackageCmdSet, PackageIds.ClearCacheId);
@@ -32,15 +25,8 @@ namespace ClearComponentCache
 
         public static ClearCache Instance { get; private set; }
 
-        private IServiceProvider ServiceProvider
-        {
-            get { return package; }
-        }
+        private IServiceProvider ServiceProvider { get; }
 
-        /// <summary>
-        /// Initializes the singleton instance of the command.
-        /// </summary>
-        /// <param name="package">Owner package, not null.</param>
         public static void Initialize(Package package)
         {
             Instance = new ClearCache(package);
@@ -53,6 +39,7 @@ namespace ClearComponentCache
 
             if (result == DialogResult.No)
                 return;
+
             string folder = GetFolderPath();
 
             if (!string.IsNullOrEmpty(folder) && Directory.Exists(folder))

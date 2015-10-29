@@ -1,3 +1,4 @@
+
 ## Clear Component Cache
 
 A Visual Studio extension that clears the MEF (Managed Extensibility Framework) cache.

@@ -9,7 +9,7 @@
     <Buttons>
       <Button guid="guidClearCachePackageCmdSet" id="ClearCacheId" priority="0x9500" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_TOOLS_EXT_TOOLS" />
-        <Icon guid="ImageCatalogGuid" id="CleanData" />
+        <Icon guid="ImageCatalogGuid" id="Repair" />
         <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
           <ButtonText>Clear MEF Component Cache...</ButtonText>

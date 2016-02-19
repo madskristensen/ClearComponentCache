@@ -47,7 +47,7 @@ namespace ClearComponentCache
 
         private bool UserWantsToProceed()
         {
-            return MessageBox.Show(Text.promptText, ClearCachePackage.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+            return MessageBox.Show(Text.promptText, Vsix.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
         }
 
         private string GetFolderPath()

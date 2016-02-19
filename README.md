@@ -50,5 +50,15 @@ cache belonging to the current root suffix.
 Read more about the
 [/RootSuffix command line switch](http://blog.slaks.net/2014-01-27/creating-multiple-visual-studio-profiles-with-rootsuffix/).
 
+## Contribute
+Check out the [contribution guidelines](.github/CONTRIBUTING.md)
+if you want to contribute to this project.
+
+For cloning and building this project yourself, make sure 
+to install the
+[Extensibility Tools 2015](https://visualstudiogallery.msdn.microsoft.com/ab39a092-1343-46e2-b0f1-6a3f91155aa6)
+extension for Visual Studio which enables some features
+used by this project.
+
 ## License
-[Apache 2.0](LICENSE)
+[Apache 2.0](LICENSE) 

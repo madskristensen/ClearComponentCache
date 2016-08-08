@@ -10,11 +10,10 @@ namespace ClearComponentCache
 {
     internal sealed class ClearCache
     {
-        private ClearCache(Package package)
+        private ClearCache(OleMenuCommandService commandService, AsyncPackage package)
         {
             ServiceProvider = package;
 
-            OleMenuCommandService commandService = ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             var commandID = new CommandID(PackageGuids.guidClearCachePackageCmdSet, PackageIds.ClearCacheId);
             var button = new MenuCommand(DeleteCacheFolder, commandID);
             commandService.AddCommand(button);
@@ -22,23 +21,24 @@ namespace ClearComponentCache
 
         public static ClearCache Instance { get; private set; }
 
-        private IServiceProvider ServiceProvider { get; }
+        private AsyncPackage ServiceProvider { get; }
 
-        public static void Initialize(Package package)
+        public static async System.Threading.Tasks.Task InitializeAsync(AsyncPackage package)
         {
-            Instance = new ClearCache(package);
+            var commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
+            Instance = new ClearCache(commandService, package);
         }
 
-        private void DeleteCacheFolder(object sender, EventArgs e)
+        private async void DeleteCacheFolder(object sender, EventArgs e)
         {
             if (!UserWantsToProceed())
                 return;
 
-            string folder = GetFolderPath();
+            string folder = await GetFolderPath();
 
             if (!string.IsNullOrEmpty(folder) && Directory.Exists(folder))
             {
-                IVsShell4 shell = (IVsShell4)ServiceProvider.GetService(typeof(SVsShell));
+                var shell = await ServiceProvider.GetServiceAsync(typeof(SVsShell)) as IVsShell4;
                 shell.Restart((uint)__VSRESTARTTYPE.RESTART_Normal);
 
                 Directory.Delete(folder, true);
@@ -50,9 +50,10 @@ namespace ClearComponentCache
             return MessageBox.Show(Resources.Text.promptText, Vsix.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
         }
 
-        private string GetFolderPath()
+        private async System.Threading.Tasks.Task<string> GetFolderPath()
         {
-            var shell = (IVsShell)ServiceProvider.GetService(typeof(SVsShell));
+            var shell = await ServiceProvider.GetServiceAsync(typeof(SVsShell)) as IVsShell;
+
             object root;
 
             // Gets the version number with the /rootsuffix. Example: "14.0Exp"

@@ -14,6 +14,7 @@ namespace ClearComponentCache
         protected override async System.Threading.Tasks.Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
             await ClearCache.InitializeAsync(this);
+            await ShowErrors.InitializeAsync(this);
         }
     }
 }

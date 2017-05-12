@@ -15,8 +15,14 @@
           <ButtonText>Clear MEF Component Cache...</ButtonText>
         </Strings>
       </Button>
-    </Buttons>
 
+      <Button guid="guidClearCachePackageCmdSet" id="ShowErrorsId" priority="0x9501" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_TOOLS_EXT_TOOLS" />
+        <Strings>
+          <ButtonText>Show MEF Errors</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
   </Commands>
 
   <Symbols>
@@ -25,6 +31,7 @@
 
     <GuidSymbol name="guidClearCachePackageCmdSet" value="{a0c73f0b-ee00-4b48-be1d-99b6deb8652d}">
       <IDSymbol name="ClearCacheId" value="100" />
+      <IDSymbol name="ShowErrorsId" value="101" />
     </GuidSymbol>
   </Symbols>
 </CommandTable>

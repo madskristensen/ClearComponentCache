@@ -58,6 +58,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClearCachePackage.vsct</DependentUpon>
     </Compile>
+    <Compile Include="Commands\ComponentModelExtensions.cs" />
     <Compile Include="Commands\ShowErrors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="source.extension.cs">

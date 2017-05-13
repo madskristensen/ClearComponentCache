@@ -7,7 +7,7 @@
 
   <Commands package="guidClearCachePackage">
     <Buttons>
-      <Button guid="guidClearCachePackageCmdSet" id="ClearCacheId" priority="0x9500" type="Button">
+      <Button guid="guidClearCachePackageCmdSet" id="ClearCacheId" priority="0x9505" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_TOOLS_EXT_TOOLS" />
         <Icon guid="ImageCatalogGuid" id="Repair" />
         <CommandFlag>IconIsMoniker</CommandFlag>
@@ -16,8 +16,10 @@
         </Strings>
       </Button>
 
-      <Button guid="guidClearCachePackageCmdSet" id="ShowErrorsId" priority="0x9501" type="Button">
+      <Button guid="guidClearCachePackageCmdSet" id="ShowErrorsId" priority="0x9506" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_TOOLS_EXT_TOOLS" />
+        <Icon guid="ImageCatalogGuid" id="LogError" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
           <ButtonText>Show MEF Errors</ButtonText>
         </Strings>

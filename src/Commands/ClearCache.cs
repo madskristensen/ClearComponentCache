@@ -54,10 +54,8 @@ namespace ClearComponentCache
         {
             var shell = await ServiceProvider.GetServiceAsync(typeof(SVsShell)) as IVsShell;
 
-            object root;
-
             // Gets the version number with the /rootsuffix. Example: "14.0Exp"
-            if (shell.GetProperty((int)__VSSPROPID.VSSPROPID_VirtualRegistryRoot, out root) == VSConstants.S_OK)
+            if (shell.GetProperty((int)__VSSPROPID.VSSPROPID_VirtualRegistryRoot, out object root) == VSConstants.S_OK)
             {
                 string appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 string version = Path.GetFileName(root.ToString());

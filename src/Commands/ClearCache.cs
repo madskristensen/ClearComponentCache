@@ -34,7 +34,8 @@ namespace ClearComponentCache
             if (!UserWantsToProceed())
                 return;
 
-            string folder = await GetFolderPath();
+            var componentModelHost = await ServiceProvider.GetServiceAsync(typeof(SVsComponentModelHost)) as IVsComponentModelHost;
+            string folder = componentModelHost.GetFolderPath();
 
             if (!string.IsNullOrEmpty(folder) && Directory.Exists(folder))
             {
@@ -48,22 +49,6 @@ namespace ClearComponentCache
         private bool UserWantsToProceed()
         {
             return MessageBox.Show(Resources.Text.promptText, Vsix.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
-        }
-
-        private async System.Threading.Tasks.Task<string> GetFolderPath()
-        {
-            var shell = await ServiceProvider.GetServiceAsync(typeof(SVsShell)) as IVsShell;
-
-            // Gets the version number with the /rootsuffix. Example: "14.0Exp"
-            if (shell.GetProperty((int)__VSSPROPID.VSSPROPID_VirtualRegistryRoot, out object root) == VSConstants.S_OK)
-            {
-                string appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                string version = Path.GetFileName(root.ToString());
-
-                return Path.Combine(appData, "Microsoft\\VisualStudio", version, "ComponentModelCache");
-            }
-
-            return null;
         }
     }
 }

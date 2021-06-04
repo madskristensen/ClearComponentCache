@@ -1,9 +1,10 @@
-﻿using System;
-using System.ComponentModel.Design;
-using System.IO;
+﻿using Microsoft;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using EnvDTE;
+
+using System;
+using System.ComponentModel.Design;
+using System.IO;
 
 namespace ClearComponentCache
 {
@@ -28,23 +29,32 @@ namespace ClearComponentCache
             Instance = new ShowErrors(commandService, package);
         }
 
-        private async void OpenErrorFile(object sender, EventArgs e)
+        private void OpenErrorFile(object sender, EventArgs e)
         {
-            var shell = await ServiceProvider.GetServiceAsync(typeof(SVsComponentModelHost)) as IVsComponentModelHost;
-            var dte = await ServiceProvider.GetServiceAsync(typeof(DTE)) as DTE;
-            OpenErrorFile(shell, dte);
-        }
+            var folder = ServiceProvider.UserLocalDataPath;
+            var file = Path.Combine(folder, "ComponentModelCache", "Microsoft.VisualStudio.Default.err");
 
-        private static void OpenErrorFile(IVsComponentModelHost componentModelHost, DTE dte)
-        {
-            var file = componentModelHost.GetDefaultErrorFile();
             if (!File.Exists(file))
             {
-                dte.StatusBar.Text = $"Couldn't find file at '{file}'.";
-                return;
-            }
+                ServiceProvider.JoinableTaskFactory.RunAsync(async () =>
+                {
+                    var statusBar = await ServiceProvider.GetServiceAsync(typeof(SVsStatusbar)) as IVsStatusbar;
+                    Assumes.Present(statusBar);
 
-            dte.ItemOperations.OpenFile(file);
+                    statusBar.IsFrozen(out int isFrozen);
+
+                    if (isFrozen == 1)
+                    {
+                        statusBar.FreezeOutput(0);
+                    }
+
+                    statusBar.SetText($"Couldn't find file at '{file}'.");
+                });
+            }
+            else
+            {
+                VsShellUtilities.OpenDocument(ServiceProvider, file, Guid.Empty, out _, out _, out _);
+            }
         }
     }
 }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
+
+using System;
 using System.ComponentModel.Design;
 using System.IO;
 using System.Windows.Forms;
-using Microsoft.VisualStudio;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
 
 namespace ClearComponentCache
 {
@@ -34,12 +35,13 @@ namespace ClearComponentCache
             if (!UserWantsToProceed())
                 return;
 
-            var componentModelHost = await ServiceProvider.GetServiceAsync(typeof(SVsComponentModelHost)) as IVsComponentModelHost;
-            string folder = componentModelHost.GetFolderPath();
+            var folder = Path.Combine(ServiceProvider.UserLocalDataPath, "ComponentModelCache");
 
             if (!string.IsNullOrEmpty(folder) && Directory.Exists(folder))
             {
                 var shell = await ServiceProvider.GetServiceAsync(typeof(SVsShell)) as IVsShell4;
+                Assumes.Present(shell);
+
                 shell.Restart((uint)__VSRESTARTTYPE.RESTART_Normal);
 
                 Directory.Delete(folder, true);
